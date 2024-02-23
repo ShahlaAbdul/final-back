@@ -8,7 +8,7 @@ const newsSchema = new Schema({
     title: String,
     ending: String,
     call: String,
-    hashtag: String,
-  },
+    hashtag: String
+  }
 });
 export const NewsModel = mongoose.model("News", newsSchema);

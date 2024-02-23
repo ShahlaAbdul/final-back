@@ -1,11 +1,11 @@
-import {NewsModel} from "../model/newsModel.js"
+import { NewsModel } from "../model/newsModel.js";
 
 export const getAllNews = async (req, res) => {
   try {
     const news = await NewsModel.find({});
-    res.send(news);
+    res.json(news);
   } catch (error) {
-    res.send(error.message);
+    res.status(500).json({ message: error.message });
   }
 };
 
@@ -13,7 +13,7 @@ export const getNewsById = async (req, res) => {
   try {
     const { id } = req.params;
     const news = await NewsModel.findById(id);
-    res.send(news);
+    res.json(news);
   } catch (error) {
     res.send(error.message);
   }
@@ -49,7 +49,7 @@ export const updateNewsById = async (req, res) => {
 export const deleteNewsById = async (req, res) => {
   try {
     const { id } = req.params;
-    const newNews = NewsModel.findByIdAndDelete(id);
+    const newNews = await NewsModel.findByIdAndDelete(id);
     res.send(newNews);
   } catch (error) {
     res.send(error.message);
